@@ -9,6 +9,7 @@ In this example we'll build an image in OpenShift, create service and expose it 
 ```bash
 git clone https://github.com/nickschuetz/ocparcade
 cd ocparcade/arkanoid
+oc new-project ocparcade
 oc new-app --strategy=docker --binary  --name=arknoid
 oc start-build arkanoid --from-dir .
 oc logs deployment/arkanoid -f
@@ -22,7 +23,7 @@ echo http://$(oc get routes arknoid -n ocparcade -o=jsonpath='{range .spec}{.hos
 Here's an example of deploying Epic Pinball from a pre-built image built using Podman and stored in Quay.io
 
 ```bash
-oc new-project epicpinball
+oc new-project ocparcade
 oc new-app quay.io/ocparcade/epicpinball
 oc expose service/epicpinball
 echo http://$(oc get routes epicpinball -n ocparcade -o=jsonpath='{range .spec}{.host}{"\n"}{end}')
@@ -33,8 +34,13 @@ echo http://$(oc get routes epicpinball -n ocparcade -o=jsonpath='{range .spec}{
 A big thank you to the open source projects that made this possible.
 
 [OpenShift](https://github.com/openshift/)
+
 [Podman](https://podman.io/)
+
 [Quay](https://www.projectquay.io/)
+
 [Universal Base Images](https://access.redhat.com/articles/4238681)
+
 [DOSBox](https://www.dosbox.com/)
+
 [js-dos](https://js-dos.com/)
