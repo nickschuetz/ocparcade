@@ -10,12 +10,12 @@ In this example we'll build an image in OpenShift, create service and expose it 
 git clone https://github.com/nickschuetz/ocparcade
 cd ocparcade/arkanoid
 oc new-project ocparcade
-oc new-app --strategy=docker --binary  --name=arknoid
+oc new-app --strategy=docker --binary --name=arkanoid
 oc start-build arkanoid --from-dir .
 oc logs deployment/arkanoid -f
 oc expose deployment/arkanoid --port 8080
 oc expose service/arkanoid
-echo http://$(oc get routes arknoid -n ocparcade -o=jsonpath='{range .spec}{.host}{"\n"}{end}')
+echo http://$(oc get routes arkanoid -n ocparcade -o=jsonpath='{range .spec}{.host}{"\n"}{end}')
 ```
 
 ## Deploy from pre-built image
